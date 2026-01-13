@@ -1,0 +1,59 @@
+body {
+  margin: 0;
+  background: transparent;
+}
+
+.led {
+  width: 100%;
+  max-width: 1600px;
+  height: 70px;
+  overflow: hidden;
+  background: #050505;
+  border: 2px solid #111;
+  border-radius: 6px;
+  position: relative;
+}
+
+.led::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle, rgba(255,255,255,.3) 1px, transparent 1px);
+  background-size: 6px 6px;
+  opacity: .3;
+  pointer-events: none;
+}
+
+.led-track {
+  position: absolute;
+  display: inline-flex;
+  white-space: nowrap;
+  font-family: monospace;
+  font-size: 34px;
+  font-weight: bold;
+  line-height: 70px;
+  will-change: transform;
+}
+
+/* Colores */
+
+.gold {
+  color: #ffd700;
+  text-shadow: 0 0 8px #ffd700;
+}
+
+.danger {
+  color: #ff0000;
+  text-shadow: 0 0 8px #ff0000;
+}
+
+.info {
+  color: #00d4ff;
+  text-shadow: 0 0 8px #00d4ff;
+}
+
+.white {
+  color: #ffffff;
+  opacity: 0.65;
+}
