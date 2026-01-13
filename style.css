@@ -6,54 +6,82 @@ body {
 .led {
   width: 100%;
   max-width: 1600px;
-  height: 70px;
+  height: 80px; /* Un poco más alto para que el brillo no se corte */
   overflow: hidden;
-  background: #050505;
-  border: 2px solid #111;
-  border-radius: 6px;
+  background: #000; /* Negro puro para que resalten los colores */
+  border: 3px solid #1a1a1a;
+  border-radius: 4px;
   position: relative;
+  box-shadow: inset 0 0 20px rgba(0,0,0,1); /* Sombra interna para profundidad */
 }
 
+/* Efecto de rejilla LED mejorado */
 .led::before {
   content: "";
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(circle, rgba(255,255,255,.3) 1px, transparent 1px);
-  background-size: 6px 6px;
-  opacity: .3;
+  /* Scanlines horizontales tipo monitor viejo */
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%
+  ), 
+  linear-gradient(
+    90deg, 
+    rgba(255, 0, 0, 0.06), 
+    rgba(0, 255, 0, 0.02), 
+    rgba(0, 0, 255, 0.06)
+  );
+  background-size: 100% 3px, 3px 100%;
+  z-index: 10;
   pointer-events: none;
 }
 
 .led-track {
   position: absolute;
   display: inline-flex;
+  align-items: center;
   white-space: nowrap;
-  font-family: monospace;
-  font-size: 34px;
-  font-weight: bold;
-  line-height: 70px;
+  /* Fuente tipo sistema/arcade para GTA */
+  font-family: 'Courier New', Courier, monospace; 
+  font-size: 32px;
+  font-weight: 900;
+  height: 100%;
   will-change: transform;
+  letter-spacing: 1px;
 }
 
-/* Colores */
+/* --- CLASES DE COLOR CON EFECTO NEÓN --- */
 
 .gold {
-  color: #ffd700;
-  text-shadow: 0 0 8px #ffd700;
+  color: #ffeb3b;
+  text-shadow: 0 0 12px rgba(255, 235, 59, 0.8), 0 0 20px rgba(255, 215, 0, 0.4);
+  padding: 0 10px;
 }
 
 .danger {
-  color: #ff0000;
-  text-shadow: 0 0 8px #ff0000;
+  color: #ff3d00;
+  text-shadow: 0 0 12px rgba(255, 61, 0, 0.8), 0 0 20px rgba(255, 0, 0, 0.4);
+  padding: 0 10px;
+  text-transform: uppercase; /* Para que los enemigos den más miedo */
 }
 
 .info {
-  color: #00d4ff;
-  text-shadow: 0 0 8px #00d4ff;
+  color: #00e5ff;
+  text-shadow: 0 0 12px rgba(0, 229, 255, 0.8), 0 0 20px rgba(0, 212, 255, 0.4);
+  padding: 0 10px;
 }
 
-.white {
-  color: #ffffff;
-  opacity: 0.65;
+/* Separadores */
+.red {
+  color: #ff0000;
+  opacity: 0.8;
+  font-weight: 100;
+  margin: 0 20px; /* Más espacio entre items */
+}
+
+.blue {
+  color: #2979ff;
+  font-size: 40px; /* Los divisores de sección son más grandes */
+  margin: 0 50px; /* Mucho espacio antes de cambiar de LIKES a REGALOS */
+  text-shadow: 0 0 15px #2979ff;
 }
