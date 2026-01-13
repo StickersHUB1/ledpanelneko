@@ -48,6 +48,7 @@ body {
   height: 100%;
   will-change: transform;
   letter-spacing: 1px;
+  color: blue;
 }
 
 /* --- CLASES DE COLOR CON EFECTO NEÓN --- */
@@ -85,3 +86,4 @@ body {
   margin: 0 50px; /* Mucho espacio antes de cambiar de LIKES a REGALOS */
   text-shadow: 0 0 15px #2979ff;
 }
+
