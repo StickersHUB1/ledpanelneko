@@ -50,7 +50,7 @@ body {
   letter-spacing: 1px;
 }
 
-/* --- CLASES DE COLOR CON EFECTO NEON --- */
+/* --- CLASES DE COLOR CON EFECTO NEÓN --- */
 
 .gold {
   color: #ffeb3b;
@@ -85,4 +85,3 @@ body {
   margin: 0 50px; /* Mucho espacio antes de cambiar de LIKES a REGALOS */
   text-shadow: 0 0 15px #2979ff;
 }
-
