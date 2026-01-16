@@ -6,34 +6,24 @@ body {
 .led {
   width: 100%;
   max-width: 1600px;
-  height: 80px; /* Un poco más alto para que el brillo no se corte */
+  height: 80px;
   overflow: hidden;
-  background: #000; /* Negro puro para que resalten los colores */
-  border: 3px solid #1a1a1a;
-  border-radius: 4px;
+  background: #000;
+  border: 3px solid #111;
   position: relative;
-  box-shadow: inset 0 0 20px rgba(0,0,0,1); /* Sombra interna para profundidad */
+  box-shadow: inset 0 0 20px #000;
 }
 
-/* Efecto de rejilla LED mejorado */
 .led::before {
   content: "";
   position: absolute;
   inset: 0;
-  /* Scanlines horizontales tipo monitor viejo */
-  background: linear-gradient(
-    rgba(18, 16, 16, 0) 50%, 
-    rgba(0, 0, 0, 0.25) 50%
-  ), 
-  linear-gradient(
-    90deg, 
-    rgba(255, 0, 0, 0.06), 
-    rgba(0, 255, 0, 0.02), 
-    rgba(0, 0, 255, 0.06)
-  );
+  background:
+    linear-gradient(rgba(0,0,0,0) 50%, rgba(0,0,0,0.25) 50%),
+    linear-gradient(90deg, rgba(255,0,0,0.05), rgba(0,255,0,0.02), rgba(0,0,255,0.05));
   background-size: 100% 3px, 3px 100%;
-  z-index: 10;
   pointer-events: none;
+  z-index: 10;
 }
 
 .led-track {
@@ -41,49 +31,90 @@ body {
   display: inline-flex;
   align-items: center;
   white-space: nowrap;
-  /* Fuente tipo sistema/arcade para GTA */
-  font-family: 'Courier New', Courier, monospace; 
+  height: 100%;
+  font-family: 'Courier New', monospace;
   font-size: 32px;
   font-weight: 900;
-  height: 100%;
   will-change: transform;
-  letter-spacing: 1px;
-  color: blue;
 }
 
-/* --- CLASES DE COLOR CON EFECTO NEÓN --- */
+/* ===== COLORS ===== */
 
 .gold {
   color: #ffeb3b;
-  text-shadow: 0 0 12px rgba(255, 235, 59, 0.8), 0 0 20px rgba(255, 215, 0, 0.4);
+  text-shadow: 0 0 12px #ffeb3b;
   padding: 0 10px;
 }
 
 .danger {
   color: #ff3d00;
-  text-shadow: 0 0 12px rgba(255, 61, 0, 0.8), 0 0 20px rgba(255, 0, 0, 0.4);
+  text-shadow: 0 0 12px #ff3d00;
   padding: 0 10px;
-  text-transform: uppercase; /* Para que los enemigos den más miedo */
+  text-transform: uppercase;
 }
 
 .info {
   color: #00e5ff;
-  text-shadow: 0 0 12px rgba(0, 229, 255, 0.8), 0 0 20px rgba(0, 212, 255, 0.4);
+  text-shadow: 0 0 12px #00e5ff;
   padding: 0 10px;
 }
 
-/* Separadores */
 .red {
   color: #ff0000;
-  opacity: 0.8;
-  font-weight: 100;
-  margin: 0 20px; /* Más espacio entre items */
+  margin: 0 20px;
 }
 
 .blue {
   color: #2979ff;
-  font-size: 40px; /* Los divisores de sección son más grandes */
-  margin: 0 50px; /* Mucho espacio antes de cambiar de LIKES a REGALOS */
+  font-size: 40px;
+  margin: 0 40px;
   text-shadow: 0 0 15px #2979ff;
 }
 
+/* ===== MINI BOTS ===== */
+
+.minibot {
+  width: 48px;
+  height: 36px;
+  margin: 0 16px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background: rgba(255,255,255,0.04);
+  border-radius: 6px;
+  box-shadow: inset 0 0 6px rgba(255,255,255,0.1), 0 0 12px rgba(255,105,180,0.4);
+  animation: floaty 4s ease-in-out infinite;
+}
+
+.minibot::before {
+  content: "•   •";
+  position: absolute;
+  top: 6px;
+  font-size: 18px;
+  letter-spacing: 6px;
+  color: #ffb7d5;
+  text-shadow: 0 0 6px #ffb7d5;
+}
+
+.minibot::after {
+  content: "w";
+  position: absolute;
+  bottom: 4px;
+  font-size: 18px;
+  color: #ff80bf;
+  text-shadow: 0 0 6px #ff80bf;
+}
+
+.minibot.happy::after { content: "ω"; }
+.minibot.sleepy::after { content: "ᴗ"; opacity: 0.7; }
+
+.minibot.blink::before {
+  content: "─   ─";
+  letter-spacing: 8px;
+}
+
+@keyframes floaty {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
