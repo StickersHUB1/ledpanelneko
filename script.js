@@ -1,6 +1,6 @@
 const track = document.getElementById("ledTrack");
 
-/* duplicado para scroll infinito real */
+/* Scroll infinito */
 track.innerHTML += track.innerHTML;
 
 const speed = 120;
@@ -21,20 +21,18 @@ function loop(now) {
 init();
 requestAnimationFrame(loop);
 
-/* ===== MINI BOT BLINK ===== */
-
+/* VIDA ARTIFICIAL */
 const bots = document.querySelectorAll(".minibot");
 
-function randomBlink(bot) {
-  const delay = 1200 + Math.random() * 4000;
-
-  setTimeout(() => {
+function life(bot){
+  const delay = 1200 + Math.random()*4200;
+  setTimeout(()=>{
     bot.classList.add("blink");
-    setTimeout(() => {
+    setTimeout(()=>{
       bot.classList.remove("blink");
-      randomBlink(bot);
-    }, 120 + Math.random() * 120);
-  }, delay);
+      life(bot);
+    },100+Math.random()*120);
+  },delay);
 }
 
-bots.forEach(randomBlink);
+bots.forEach(life);
