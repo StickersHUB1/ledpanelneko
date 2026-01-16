@@ -1,120 +1,209 @@
-body {
-  margin: 0;
-  background: transparent;
-}
+/* ===== BASE ===== */
+
+body { margin:0; background:transparent; }
 
 .led {
-  width: 100%;
-  max-width: 1600px;
-  height: 80px;
-  overflow: hidden;
-  background: #000;
-  border: 3px solid #111;
-  position: relative;
-  box-shadow: inset 0 0 20px #000;
+  width:100%;
+  max-width:1600px;
+  height:80px;
+  overflow:hidden;
+  background:#000;
+  border:3px solid #111;
+  position:relative;
+  box-shadow:inset 0 0 20px #000;
 }
 
 .led::before {
-  content: "";
-  position: absolute;
-  inset: 0;
+  content:"";
+  position:absolute;
+  inset:0;
   background:
     linear-gradient(rgba(0,0,0,0) 50%, rgba(0,0,0,0.25) 50%),
     linear-gradient(90deg, rgba(255,0,0,0.05), rgba(0,255,0,0.02), rgba(0,0,255,0.05));
-  background-size: 100% 3px, 3px 100%;
-  pointer-events: none;
-  z-index: 10;
+  background-size:100% 3px,3px 100%;
+  pointer-events:none;
+  z-index:10;
 }
 
 .led-track {
-  position: absolute;
-  display: inline-flex;
-  align-items: center;
-  white-space: nowrap;
-  height: 100%;
-  font-family: 'Courier New', monospace;
-  font-size: 32px;
-  font-weight: 900;
-  will-change: transform;
+  position:absolute;
+  display:inline-flex;
+  align-items:center;
+  white-space:nowrap;
+  height:100%;
+  font-family:'Courier New', monospace;
+  font-size:32px;
+  font-weight:900;
+  will-change:transform;
+}
+
+/* ===== COLORS TEXT ===== */
+
+.gold{color:#ffeb3b;text-shadow:0 0 12px #ffeb3b;padding:0 10px;}
+.info{color:#00e5ff;text-shadow:0 0 12px #00e5ff;padding:0 10px;}
+.danger{color:#ff3d00;text-shadow:0 0 12px #ff3d00;padding:0 10px;}
+.red{color:#ff0000;margin:0 20px;}
+.blue{color:#2979ff;font-size:40px;margin:0 40px;text-shadow:0 0 15px #2979ff;}
+
+/* =========================
+   MINIBOT VIDA ARTIFICIAL
+========================= */
+
+.minibot {
+  width:44px;
+  height:32px;
+  margin:0 14px;
+  position:relative;
+  display:inline-block;
+
+  background:radial-gradient(circle at 30% 30%, #2a2a2a, #050505);
+  border-radius:6px;
+
+  --bot-color:#7ffcff;
+
+  box-shadow:
+    inset 0 0 6px rgba(255,255,255,0.15),
+    0 0 12px var(--bot-color);
+
+  animation:float 3.8s ease-in-out infinite;
+}
+
+/* OJOS */
+.minibot::before{
+  content:"";
+  position:absolute;
+  top:9px;
+  left:8px;
+  right:8px;
+  height:6px;
+  background:
+    radial-gradient(circle, var(--bot-color) 60%, transparent 65%) left center / 6px 6px no-repeat,
+    radial-gradient(circle, var(--bot-color) 60%, transparent 65%) right center / 6px 6px no-repeat;
+  filter:drop-shadow(0 0 4px var(--bot-color));
+}
+
+/* BOCA */
+.minibot::after{
+  content:"";
+  position:absolute;
+  bottom:7px;
+  left:50%;
+  width:10px;
+  height:6px;
+  transform:translateX(-50%);
+  border-bottom:2px solid var(--bot-color);
+  border-radius:0 0 8px 8px;
+  filter:drop-shadow(0 0 4px var(--bot-color));
+}
+
+/* ===== STATES ===== */
+
+.minibot.happy::after{width:12px;border-bottom-width:3px;}
+.minibot.sleepy{animation:floatSleep 6s ease-in-out infinite;}
+.minibot.sleepy::before{
+  height:2px;
+  background:
+    linear-gradient(var(--bot-color),var(--bot-color)) left center/8px 2px no-repeat,
+    linear-gradient(var(--bot-color),var(--bot-color)) right center/8px 2px no-repeat;
+}
+
+/* 😲 SURPRISED */
+.minibot.surprised::before{
+  background:
+    radial-gradient(circle, var(--bot-color) 65%, transparent 70%) left center/8px 8px no-repeat,
+    radial-gradient(circle, var(--bot-color) 65%, transparent 70%) right center/8px 8px no-repeat;
+}
+
+.minibot.surprised::after{
+  width:8px;
+  height:8px;
+  border:2px solid var(--bot-color);
+  border-radius:50%;
+}
+
+/* BLINK */
+.minibot.blink::before{
+  height:2px;
+  background:
+    linear-gradient(var(--bot-color),var(--bot-color)) left center/8px 2px no-repeat,
+    linear-gradient(var(--bot-color),var(--bot-color)) right center/8px 2px no-repeat;
 }
 
 /* ===== COLORS ===== */
 
-.gold {
-  color: #ffeb3b;
-  text-shadow: 0 0 12px #ffeb3b;
-  padding: 0 10px;
+.cyan{--bot-color:#7ffcff;}
+.pink{--bot-color:#ff9ad5;}
+.green{--bot-color:#7cff9a;}
+.teal{--bot-color:#5effe0;}
+.yellow{--bot-color:#ffe66d;}
+.orange{--bot-color:#ffb347;}
+.red{--bot-color:#ff5c5c;}
+.blue{--bot-color:#6fa8ff;}
+.rainbow{--bot-color:#ff7cff; box-shadow:0 0 14px #ff7cff,0 0 24px #7cfffa;}
+
+/* ===== FLOAT ===== */
+
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-4px);}}
+@keyframes floatSleep{0%,100%{transform:translateY(0) scale(0.97);}50%{transform:translateY(-2px) scale(1);}}
+
+/* =========================
+   INTENSIDAD (VISIBLE)
+========================= */
+
+.lvl-low {
+  color: #9befff; /* cyan sólido */
 }
 
-.danger {
-  color: #ff3d00;
-  text-shadow: 0 0 12px #ff3d00;
-  padding: 0 10px;
-  text-transform: uppercase;
+.lvl-mid {
+  color: #7dffb3; /* verde sólido */
 }
 
-.info {
-  color: #00e5ff;
-  text-shadow: 0 0 12px #00e5ff;
-  padding: 0 10px;
+.lvl-high {
+  color: #fff08a; /* amarillo sólido */
 }
 
-.red {
-  color: #ff0000;
-  margin: 0 20px;
+.lvl-danger {
+  color: #ffc07a; /* naranja sólido */
 }
 
-.blue {
-  color: #2979ff;
-  font-size: 40px;
-  margin: 0 40px;
-  text-shadow: 0 0 15px #2979ff;
+.lvl-critical {
+  color: #ff6b6b; /* rojo sólido */
+  animation: pulseDanger 1.2s infinite alternate;
 }
 
-/* ===== MINI BOTS ===== */
-
-.minibot {
-  width: 48px;
-  height: 36px;
-  margin: 0 16px;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  background: rgba(255,255,255,0.04);
-  border-radius: 6px;
-  box-shadow: inset 0 0 6px rgba(255,255,255,0.1), 0 0 12px rgba(255,105,180,0.4);
-  animation: floaty 4s ease-in-out infinite;
+@keyframes pulseDanger {
+  from {
+    text-shadow:
+      0 0 2px rgba(0,0,0,0.9),
+      0 0 10px #ff6b6b,
+      0 0 18px #ff0000;
+  }
+  to {
+    text-shadow:
+      0 0 2px rgba(0,0,0,0.9),
+      0 0 18px #ff6b6b,
+      0 0 30px #ff0000;
+  }
 }
 
-.minibot::before {
-  content: "•   •";
-  position: absolute;
-  top: 6px;
-  font-size: 18px;
+.sep {
+  color: rgba(255,255,255,0.55);
+  text-shadow: 0 0 6px rgba(255,255,255,0.35);
+  margin: 0 18px;
+}
+
+.divider {
+  color: #5fa9ff;
+  opacity: 0.6;
+  text-shadow: 0 0 10px #2979ff;
+}
+
+.loop-gap {
+  display: inline-block;
+  width: 120px;
+  color: rgba(255,255,255,0.25);
+  text-shadow: none;
   letter-spacing: 6px;
-  color: #ffb7d5;
-  text-shadow: 0 0 6px #ffb7d5;
 }
 
-.minibot::after {
-  content: "w";
-  position: absolute;
-  bottom: 4px;
-  font-size: 18px;
-  color: #ff80bf;
-  text-shadow: 0 0 6px #ff80bf;
-}
 
-.minibot.happy::after { content: "ω"; }
-.minibot.sleepy::after { content: "ᴗ"; opacity: 0.7; }
-
-.minibot.blink::before {
-  content: "─   ─";
-  letter-spacing: 8px;
-}
-
-@keyframes floaty {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
-}
