@@ -7,48 +7,45 @@
 </head>
 <body>
 
-<div class="led">
+<div class="led" data-phase="alive">
   <div class="led-track" id="ledTrack">
 
-    <!-- ================= LIKES ================= -->
     <span class="divider">░░ LIKES ░░</span>
 
-    <span class="minibot cyan"></span>
+    <span class="minibot cyan" data-state="idle"></span>
     <span class="lvl-low"><b>1❤️</b> → OBJETO ALEATORIO</span>
     <span class="sep">┃</span>
 
-    <span class="minibot yellow happy"></span>
+    <span class="minibot yellow" data-state="focus"></span>
     <span class="lvl-low"><b>50❤️</b> → 1 ZOMBIE</span>
     <span class="sep">┃</span>
 
-    <!-- ================= REGALOS ================= -->
     <span class="divider">░░ REGALOS ░░</span>
 
-    <span class="minibot cyan"></span>
+    <span class="minibot cyan" data-state="idle"></span>
     <span class="lvl-low"><b>1🪙</b> → 1 TNT</span>
     <span class="sep">┃</span>
 
-    <span class="minibot green"></span>
+    <span class="minibot green" data-state="idle"></span>
     <span class="lvl-low"><b>5🪙</b> → 1 RAYO</span>
     <span class="sep">┃</span>
 
-    <span class="minibot yellow"></span>
+    <span class="minibot yellow" data-state="focus"></span>
     <span class="lvl-mid"><b>10🪙</b> → 20 TNT🔥</span>
     <span class="sep">┃</span>
 
-    <span class="minibot orange"></span>
+    <span class="minibot orange" data-state="focus"></span>
     <span class="lvl-mid"><b>20🪙</b> → 40 TNT🔥</span>
     <span class="sep">┃</span>
 
-    <span class="minibot orange surprised"></span>
+    <span class="minibot orange" data-state="panic"></span>
     <span class="lvl-high"><b>30🪙</b> → 70 TNT🔥</span>
     <span class="sep">┃</span>
 
-    <span class="minibot red"></span>
+    <span class="minibot red" data-state="critical"></span>
     <span class="lvl-danger"><b>99🪙</b> → 200 TNT🔥</span>
     <span class="sep">┃</span>
 
-    <!-- ===== LOOP ===== -->
     <span class="loop-gap">──────</span>
 
   </div>
@@ -57,8 +54,3 @@
 <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
