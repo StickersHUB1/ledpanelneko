@@ -1,6 +1,19 @@
 :root{
-  --karma: 0.6;
-  --hue: 180;
+  --karma:0.6;
+
+  /* Fondo */
+  --bg:#020203;
+
+  /* Texto */
+  --white:#f5f5f5;
+
+  /* Colores arcade japo */
+  --sakura:#ff6fae;   /* rosa flor */
+  --cyan:#00eaff;     /* agua / koi */
+  --green:#7cff9a;
+  --yellow:#ffe66d;
+  --orange:#ffb347;
+  --red:#ff3355;
 }
 
 body{
@@ -8,22 +21,22 @@ body{
   background:#000;
 }
 
-/* ===== LED PANEL ===== */
+/* ================= PANEL ================= */
 
 .led{
   width:100%;
-  height:80px;
+  height:96px;
   overflow:hidden;
-  background:hsl(var(--hue),40%,14%);
-  border:3px solid #111;
-  box-shadow:inset 0 0 25px #000;
-  transition:background 2s linear;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255,111,174,.06), transparent 60%),
+    var(--bg);
+
+  border-top:2px solid rgba(255,255,255,.12);
+  border-bottom:2px solid rgba(255,255,255,.12);
   position:relative;
 }
 
-.led[data-phase="dead"]{
-  background:#000;
-}
+/* ================= TRACK ================= */
 
 .led-track{
   position:absolute;
@@ -31,105 +44,120 @@ body{
   align-items:center;
   height:100%;
   white-space:nowrap;
-  font-family:Courier New, monospace;
+
+  font-family:
+    "Noto Sans Mono CJK JP",
+    "MS Gothic",
+    monospace;
+
   font-size:32px;
   font-weight:900;
+  letter-spacing:1.4px;
+
   will-change:transform;
 }
 
-/* ===== TEXT ===== */
+/* ================= TEXTO ================= */
 
-.lvl-low{color:#9befff;}
-.lvl-mid{color:#7dffb3;}
-.lvl-high{color:#fff08a;}
-.lvl-danger{color:#ff9c7a;}
-.sep{margin:0 18px;color:rgba(255,255,255,0.5);}
-.divider{margin:0 30px;color:#5fa9ff;opacity:.6;}
-.loop-gap{width:120px;letter-spacing:6px;opacity:.3}
+.lvl-low,
+.lvl-mid,
+.lvl-high,
+.lvl-danger{
+  color:var(--white);
+  margin-right:64px; /* arcade = aire */
+  white-space:nowrap;
+}
 
-/* ===== MINIBOT ===== */
+/* jerarquía */
+.lvl-mid{opacity:.95;}
+.lvl-high{opacity:.9;}
+.lvl-danger{
+  color:var(--red);
+  opacity:1;
+}
+
+/* ================= SEPARADORES ================= */
+
+.sep{
+  margin-right:64px;
+  color:rgba(255,255,255,.25);
+  text-shadow:0 0 6px rgba(255,255,255,.15);
+}
+
+/* ===== REGALOS / LIKES (ARCADE SAKURA) ===== */
+
+.divider{
+  margin:0 84px;
+  font-size:26px;
+  font-weight:900;
+  letter-spacing:8px;
+  color:var(--sakura);
+
+  text-shadow:
+    0 0 6px var(--sakura),
+    0 0 16px rgba(255,111,174,.6),
+    0 0 32px rgba(255,111,174,.35);
+
+  white-space:nowrap;
+}
+
+/* hueco loop */
+.loop-gap{
+  width:160px;
+  opacity:0;
+}
+
+/* ================= MINIBOT ================= */
 
 .minibot{
-  width:44px;
-  height:32px;
-  margin:0 14px;
-  background:#050505;
-  border-radius:6px;
-  position:relative;
-  --bot-color:#7ffcff;
+  width:16px;
+  height:16px;
+  margin-right:20px;
+
+  border-radius:3px;
+  background:currentColor;
+
+  /* LED arcade */
   box-shadow:
-    inset 0 0 6px rgba(255,255,255,.1),
-    0 0 calc(6px + (var(--karma) * 10px)) var(--bot-color);
-  animation:float 4s ease-in-out infinite;
+    0 0 8px currentColor,
+    0 0 18px rgba(255,255,255,.15);
+
+  opacity:.95;
 }
 
-/* ojos */
-.minibot::before{
-  content:"";
-  position:absolute;
-  top:9px;
-  left:8px;
-  right:8px;
-  height:6px;
-  background:
-    radial-gradient(circle,var(--bot-color) 60%,transparent 65%) left/6px 6px no-repeat,
-    radial-gradient(circle,var(--bot-color) 60%,transparent 65%) right/6px 6px no-repeat;
-}
+/* ================= COLORES ================= */
 
-/* boca */
-.minibot::after{
-  content:"";
-  position:absolute;
-  bottom:6px;
-  left:50%;
-  width:10px;
-  height:6px;
-  transform:translateX(-50%);
-  border-bottom:2px solid var(--bot-color);
-}
+.cyan{color:var(--cyan);}
+.green{color:var(--green);}
+.yellow{color:var(--yellow);}
+.orange{color:var(--orange);}
+.red{color:var(--red);}
 
-/* ===== STATES ===== */
+/* ================= ESTADOS ================= */
 
-.minibot[data-state="sleep"]{
-  filter:grayscale(.7);
-  animation:breathe 8s ease-in-out infinite;
+.minibot[data-state="focus"]{
+  box-shadow:
+    0 0 12px currentColor,
+    0 0 28px currentColor;
 }
 
 .minibot[data-state="panic"]{
-  animation:panic 0.4s steps(2) infinite;
+  animation:panic .5s infinite alternate;
 }
 
 .minibot[data-state="critical"]{
-  --bot-color:#ff0000;
-  animation:pulse 1s infinite;
+  opacity:1;
 }
 
-/* ===== COLORS ===== */
-
-.cyan{--bot-color:#7ffcff;}
-.green{--bot-color:#7cff9a;}
-.yellow{--bot-color:#ffe66d;}
-.orange{--bot-color:#ffb347;}
-.red{--bot-color:#ff5c5c;}
-
-/* ===== ANIMATIONS ===== */
-
-@keyframes float{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-4px);}
-}
-
-@keyframes breathe{
-  0%,100%{transform:scale(.96);}
-  50%{transform:scale(1);}
-}
+/* ================= ANIMACIONES ================= */
 
 @keyframes panic{
-  from{transform:translateX(-2px);}
-  to{transform:translateX(2px);}
+  from{transform:translateY(-1px);}
+  to{transform:translateY(1px);}
 }
 
-@keyframes pulse{
-  from{box-shadow:0 0 6px #ff0000;}
-  to{box-shadow:0 0 20px #ff0000;}
+/* ================= FASES ================= */
+
+.led[data-phase="dead"]{
+  filter:brightness(.45) grayscale(1);
 }
